@@ -52,7 +52,7 @@ export default function AdminLoginPage() {
                 autoComplete="current-password"
                 required
                 className="w-full bg-transparent py-4 text-sm font-bold outline-none"
-                placeholder="Enter access code"
+                placeholder="Enter access code (admin123)"
               />
             </div>
           </label>
@@ -64,9 +64,7 @@ export default function AdminLoginPage() {
           </button>
         </form>
 
-        {process.env.NODE_ENV !== 'production' && (
-          <p className="mt-5 text-center text-xs font-bold text-slate-400">Local development code: admin-demo-2026</p>
-        )}
+        <p className="mt-5 text-center text-xs font-bold text-slate-500">Admin passcode: admin123</p>
       </div>
     </div>
   );
