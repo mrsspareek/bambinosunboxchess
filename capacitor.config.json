@@ -17,6 +17,11 @@
       "showSpinner": false
     }
   },
+  "android": {
+    "allowMixedContent": true,
+    "captureInput": true,
+    "webContentsDebuggingEnabled": true
+  },
   "ios": {
     "contentInset": "always",
     "allowsLinkPreview": false,
