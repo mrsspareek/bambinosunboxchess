@@ -32,15 +32,16 @@ export const Sidebar: React.FC = () => {
 
   return (
     <aside className="hidden md:flex flex-col w-64 bg-white border-r border-slate-200 h-screen sticky top-0 shadow-sm z-30">
-      {/* Brand Header with Bambinos Logo */}
+      {/* Brand Header with logo2.png Logo */}
       <div className="p-5 flex items-center gap-3 border-b border-slate-100">
-        <div className="relative w-11 h-11 rounded-xl overflow-hidden shadow-md bg-bambinos-600 p-1 flex items-center justify-center">
+        <div className="relative w-11 h-11 rounded-xl overflow-hidden shadow-md bg-bambinos-600 flex items-center justify-center p-0.5">
           <Image 
-            src="/logo.png" 
+            src="/logo2.png" 
             alt="Bambinos Logo" 
-            width={40} 
-            height={40} 
-            className="object-contain"
+            width={44} 
+            height={44} 
+            className="object-contain w-full h-full"
+            unoptimized
           />
         </div>
         <div>
