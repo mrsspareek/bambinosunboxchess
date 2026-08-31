@@ -1,11 +1,12 @@
 {
   "appId": "live.bambinos.unboxchess",
   "appName": "Bambinos Unbox Chess",
-  "webDir": "out",
+  "webDir": "public",
   "bundledWebRuntime": false,
   "server": {
     "androidScheme": "https",
-    "iosScheme": "https"
+    "iosScheme": "https",
+    "cleartext": true
   },
   "plugins": {
     "SplashScreen": {
