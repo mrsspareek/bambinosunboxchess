@@ -2,7 +2,7 @@ import { requireAdminSession } from '../../lib/server/adminGate';
 
 export const dynamic = 'force-dynamic';
 
-export default function AdminLayout({ children }: { children: React.ReactNode }) {
-  requireAdminSession('/admin');
+export default async function AdminLayout({ children }: { children: React.ReactNode }) {
+  await requireAdminSession('/admin');
   return children;
 }

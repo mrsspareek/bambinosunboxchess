@@ -13,6 +13,7 @@ interface ChessboardProps {
   interactive?: boolean;
   showEvalBar?: boolean;
   evaluation?: number;
+  lastMove?: { from: string; to: string } | null;
 }
 
 const PIECE_UNICODE: Record<string, string> = {
@@ -27,7 +28,8 @@ export const Chessboard: React.FC<ChessboardProps> = ({
   annotation,
   interactive = true,
   showEvalBar = true,
-  evaluation = 0.2
+  evaluation = 0.2,
+  lastMove = null
 }) => {
   const [game, setGame] = useState<Chess>(new Chess(fen));
   const [selectedSquare, setSelectedSquare] = useState<Square | null>(null);
@@ -92,21 +94,21 @@ export const Chessboard: React.FC<ChessboardProps> = ({
 
   return (
     <div className="flex items-center gap-2 sm:gap-3 w-full justify-center">
-      {/* Stockfish Engine Evaluation Bar (Hidden on ultra-small screens, visible on sm+) */}
+      {/* Engine Evaluation Bar */}
       {showEvalBar && (
-        <div className="hidden sm:flex relative w-3.5 sm:w-4 h-[320px] sm:h-[420px] md:h-[480px] bg-slate-900 rounded-full overflow-hidden border border-slate-300 shadow-md flex-col justify-end shrink-0">
+        <div className="hidden sm:flex relative w-3.5 sm:w-4 h-[320px] sm:h-[420px] md:h-[480px] bg-slate-950 rounded-full overflow-hidden border border-slate-700 shadow-xl flex-col justify-end shrink-0">
           <div 
-            className="w-full bg-white transition-all duration-300" 
+            className="w-full bg-slate-100 transition-all duration-300 shadow-inner" 
             style={{ height: `${evalPercent}%` }}
           />
-          <div className="absolute top-1 left-0.5 right-0.5 text-[8px] font-black text-center text-white">
+          <div className="absolute top-1 left-0.5 right-0.5 text-[8px] font-black text-center text-white drop-shadow">
             {evaluation > 0 ? `+${evaluation.toFixed(1)}` : evaluation.toFixed(1)}
           </div>
         </div>
       )}
 
-      {/* 8x8 Board Container - Fully Responsive across Phone, Tablet & Desktop */}
-      <div className="relative select-none w-full max-w-[340px] sm:max-w-[420px] md:max-w-[480px] aspect-square rounded-2xl overflow-hidden shadow-2xl border-2 sm:border-4 border-bambinos-600 bg-white">
+      {/* 8x8 Board Container - Matching iOS Video Aspect Ratio & Visual Tokens */}
+      <div className="relative select-none w-full max-w-[340px] sm:max-w-[420px] md:max-w-[480px] aspect-square rounded-2xl overflow-hidden shadow-2xl border-2 sm:border-4 border-bambinos-600 bg-slate-900">
         <div className="grid grid-cols-8 grid-rows-8 w-full h-full">
           {displayRanks.map((rank, rIdx) =>
             displayFiles.map((file, fIdx) => {
@@ -116,6 +118,7 @@ export const Chessboard: React.FC<ChessboardProps> = ({
               const isSelected = selectedSquare === square;
               const isPossible = possibleMoves.includes(square);
               const isAnnotated = annotation?.square === square;
+              const isLastMoveSquare = lastMove && (lastMove.from === square || lastMove.to === square);
 
               return (
                 <div
@@ -123,9 +126,9 @@ export const Chessboard: React.FC<ChessboardProps> = ({
                   onClick={() => handleSquareClick(square)}
                   className={`relative flex items-center justify-center cursor-pointer transition-all duration-150 ${
                     isDark ? 'bg-bambinos-600 text-white' : 'bg-slate-100 text-bambinos-900'
-                  } ${isSelected ? '!bg-amber-300' : ''}`}
+                  } ${isSelected ? '!bg-amber-300/90' : ''} ${isLastMoveSquare ? '!bg-cyan-400/40' : ''}`}
                 >
-                  {/* Rank & File Coordinates */}
+                  {/* Rank & File Labels */}
                   {fIdx === 0 && (
                     <span className={`absolute top-0.5 left-1 text-[8px] sm:text-[10px] font-extrabold opacity-75 ${isDark ? 'text-white' : 'text-bambinos-700'}`}>
                       {rank}
@@ -137,9 +140,9 @@ export const Chessboard: React.FC<ChessboardProps> = ({
                     </span>
                   )}
 
-                  {/* Possible Move Indicator */}
+                  {/* Possible Move Indicator Dot / Ring */}
                   {isPossible && (
-                    <div className={`absolute rounded-full z-10 ${piece ? 'w-full h-full border-2 sm:border-4 border-bambinos-400 bg-bambinos-400/20' : 'w-3 h-3 sm:w-4 sm:h-4 bg-bambinos-500/80 shadow-md animate-pulse'}`} />
+                    <div className={`absolute rounded-full z-10 ${piece ? 'w-full h-full border-2 sm:border-4 border-rose-500/80 bg-rose-500/20' : 'w-3 h-3 sm:w-4 sm:h-4 bg-rose-500/90 shadow-lg animate-pulse'}`} />
                   )}
 
                   {/* Move Evaluation Badge Overlay */}
@@ -156,7 +159,7 @@ export const Chessboard: React.FC<ChessboardProps> = ({
                     </div>
                   )}
 
-                  {/* Clean Serif Piece Display */}
+                  {/* Piece Representation */}
                   {piece && (
                     <span className={`text-3xl sm:text-4xl md:text-5xl font-serif transform hover:scale-110 transition-transform ${
                       piece.color === 'w' 

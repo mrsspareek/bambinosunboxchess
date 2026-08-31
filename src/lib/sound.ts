@@ -1,10 +1,10 @@
-// Web Audio API Sound Synthesizer for Chess Sound Effects
+'use client';
+
 class SoundEngine {
   private ctx: AudioContext | null = null;
 
-  private getContext(): AudioContext | null {
-    if (typeof window === 'undefined') return null;
-    if (!this.ctx) {
+  private initCtx() {
+    if (!this.ctx && typeof window !== 'undefined') {
       const AudioCtx = window.AudioContext || (window as unknown as { webkitAudioContext: typeof AudioContext }).webkitAudioContext;
       if (AudioCtx) {
         this.ctx = new AudioCtx();
@@ -13,73 +13,99 @@ class SoundEngine {
     if (this.ctx && this.ctx.state === 'suspended') {
       this.ctx.resume();
     }
-    return this.ctx;
   }
 
+  // Authentic iOS Chess Move Sound (Crisp Wood Tap)
   playMove() {
-    const ctx = this.getContext();
-    if (!ctx) return;
-    const osc = ctx.createOscillator();
-    const gain = ctx.createGain();
-    osc.type = 'sine';
-    osc.frequency.setValueAtTime(400, ctx.currentTime);
-    osc.frequency.exponentialRampToValueAtTime(150, ctx.currentTime + 0.08);
-    gain.gain.setValueAtTime(0.3, ctx.currentTime);
-    gain.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + 0.08);
-    osc.connect(gain);
-    gain.connect(ctx.destination);
-    osc.start();
-    osc.stop(ctx.currentTime + 0.08);
-  }
+    try {
+      this.initCtx();
+      if (!this.ctx) return;
+      const osc = this.ctx.createOscillator();
+      const gain = this.ctx.createGain();
 
-  playCapture() {
-    const ctx = this.getContext();
-    if (!ctx) return;
-    const osc = ctx.createOscillator();
-    const gain = ctx.createGain();
-    osc.type = 'triangle';
-    osc.frequency.setValueAtTime(800, ctx.currentTime);
-    osc.frequency.exponentialRampToValueAtTime(200, ctx.currentTime + 0.12);
-    gain.gain.setValueAtTime(0.4, ctx.currentTime);
-    gain.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + 0.12);
-    osc.connect(gain);
-    gain.connect(ctx.destination);
-    osc.start();
-    osc.stop(ctx.currentTime + 0.12);
-  }
+      osc.type = 'triangle';
+      osc.frequency.setValueAtTime(320, this.ctx.currentTime);
+      osc.frequency.exponentialRampToValueAtTime(120, this.ctx.currentTime + 0.08);
 
-  playCheck() {
-    const ctx = this.getContext();
-    if (!ctx) return;
-    const osc = ctx.createOscillator();
-    const gain = ctx.createGain();
-    osc.type = 'sine';
-    osc.frequency.setValueAtTime(600, ctx.currentTime);
-    osc.frequency.setValueAtTime(900, ctx.currentTime + 0.08);
-    gain.gain.setValueAtTime(0.3, ctx.currentTime);
-    gain.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + 0.2);
-    osc.connect(gain);
-    gain.connect(ctx.destination);
-    osc.start();
-    osc.stop(ctx.currentTime + 0.2);
-  }
+      gain.gain.setValueAtTime(0.7, this.ctx.currentTime);
+      gain.gain.exponentialRampToValueAtTime(0.01, this.ctx.currentTime + 0.08);
 
-  playVictory() {
-    const ctx = this.getContext();
-    if (!ctx) return;
-    const notes = [523.25, 659.25, 783.99, 1046.50]; // C5, E5, G5, C6
-    notes.forEach((freq, idx) => {
-      const osc = ctx.createOscillator();
-      const gain = ctx.createGain();
-      osc.type = 'sine';
-      osc.frequency.setValueAtTime(freq, ctx.currentTime + idx * 0.1);
-      gain.gain.setValueAtTime(0.3, ctx.currentTime + idx * 0.1);
-      gain.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + idx * 0.1 + 0.2);
       osc.connect(gain);
-      gain.connect(ctx.destination);
-      osc.start(ctx.currentTime + idx * 0.1);
-      osc.stop(ctx.currentTime + idx * 0.1 + 0.2);
-    });
+      gain.connect(this.ctx.destination);
+
+      osc.start();
+      osc.stop(this.ctx.currentTime + 0.08);
+    } catch (e) {}
+  }
+
+  // Authentic iOS Capture Sound (Heavy Wood Impact)
+  playCapture() {
+    try {
+      this.initCtx();
+      if (!this.ctx) return;
+      const osc = this.ctx.createOscillator();
+      const gain = this.ctx.createGain();
+
+      osc.type = 'sine';
+      osc.frequency.setValueAtTime(450, this.ctx.currentTime);
+      osc.frequency.exponentialRampToValueAtTime(80, this.ctx.currentTime + 0.12);
+
+      gain.gain.setValueAtTime(0.9, this.ctx.currentTime);
+      gain.gain.exponentialRampToValueAtTime(0.01, this.ctx.currentTime + 0.12);
+
+      osc.connect(gain);
+      gain.connect(this.ctx.destination);
+
+      osc.start();
+      osc.stop(this.ctx.currentTime + 0.12);
+    } catch (e) {}
+  }
+
+  // Check Warning Sound
+  playCheck() {
+    try {
+      this.initCtx();
+      if (!this.ctx) return;
+      const osc = this.ctx.createOscillator();
+      const gain = this.ctx.createGain();
+
+      osc.type = 'sine';
+      osc.frequency.setValueAtTime(600, this.ctx.currentTime);
+      osc.frequency.setValueAtTime(800, this.ctx.currentTime + 0.08);
+
+      gain.gain.setValueAtTime(0.5, this.ctx.currentTime);
+      gain.gain.exponentialRampToValueAtTime(0.01, this.ctx.currentTime + 0.2);
+
+      osc.connect(gain);
+      gain.connect(this.ctx.destination);
+
+      osc.start();
+      osc.stop(this.ctx.currentTime + 0.2);
+    } catch (e) {}
+  }
+
+  // Game Start Chime (Matchmaking Match Found)
+  playGameStart() {
+    try {
+      this.initCtx();
+      if (!this.ctx) return;
+      const now = this.ctx.currentTime;
+      [300, 400, 520].forEach((freq, idx) => {
+        const osc = this.ctx!.createOscillator();
+        const gain = this.ctx!.createGain();
+        osc.type = 'triangle';
+        osc.frequency.setValueAtTime(freq, now + idx * 0.06);
+
+        gain.gain.setValueAtTime(0.4, now + idx * 0.06);
+        gain.gain.exponentialRampToValueAtTime(0.01, now + idx * 0.06 + 0.15);
+
+        osc.connect(gain);
+        gain.connect(this.ctx!.destination);
+
+        osc.start(now + idx * 0.06);
+        osc.stop(now + idx * 0.06 + 0.15);
+      });
+    } catch (e) {}
   }
 }
 

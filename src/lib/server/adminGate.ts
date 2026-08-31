@@ -23,7 +23,8 @@ function validSession(token: string | undefined): boolean {
   }
 }
 
-export function requireAdminSession(nextPath: string): void {
-  const token = cookies().get(COOKIE_NAME)?.value;
+export async function requireAdminSession(nextPath: string): Promise<void> {
+  const cookieStore = await cookies();
+  const token = cookieStore.get(COOKIE_NAME)?.value;
   if (!validSession(token)) redirect(`/admin-login?next=${encodeURIComponent(nextPath)}`);
 }
