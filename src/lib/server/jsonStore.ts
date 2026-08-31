@@ -8,12 +8,12 @@ function dataDirectory(): string {
 }
 
 function filePath(fileName: string): string {
-  return path.join(dataDirectory(), fileName);
+  return path.join(/* turbopackIgnore: true */ dataDirectory(), fileName);
 }
 
 export async function readJsonCollection<T>(fileName: string): Promise<T[]> {
   try {
-    const contents = await readFile(filePath(fileName), 'utf8');
+    const contents = await readFile(/* turbopackIgnore: true */ filePath(fileName), 'utf8');
     const parsed: unknown = JSON.parse(contents);
     return Array.isArray(parsed) ? (parsed as T[]) : [];
   } catch (error) {

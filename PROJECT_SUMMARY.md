@@ -91,7 +91,7 @@ The platform combines the polished competitive UX of **Chess.com** with **Bambin
 ---
 
 ### 11. 🔒 Master Admin Portal (`/admin-portal`)
-- **Separate Security Lock**: Dedicated portal protected by Admin Passcode (Default: `admin123`).
+- **Separate Security Lock**: Dedicated portal protected server-side by an environment-configured admin access code and signed HTTP-only session cookie.
 - **Financial Overview**: Total revenue stats (`$167,160`), enrolled students (`1,360`), puzzle counts, and live demo requests.
 - **Course Selling & Pricing Manager**: Create & publish paid course packages (*Unbox Chess Beginner $199*, *1-on-1 Live Coaching $99*), set target age groups (7-10, 10+), and manage student enrollments.
 - **48-Session Curriculum Manager**: Edit session plans, PDF slide deck links, analogies, and lesson step durations.
@@ -111,7 +111,7 @@ The platform combines the polished competitive UX of **Chess.com** with **Bambin
 
 | Layer | Technology |
 | :--- | :--- |
-| **Framework** | Next.js 14 (App Router, React 18, TypeScript) |
+| **Framework** | Next.js 16.3 (App Router, React 18, TypeScript) |
 | **Styling** | Tailwind CSS with custom Bambinos White & Blue color tokens |
 | **Chess Engine** | Chess.js rule engine & FEN validator |
 | **Sound Effects** | Web Audio API Synthesizer (Move, Capture, Check, Victory) |
@@ -131,4 +131,4 @@ The platform combines the polished competitive UX of **Chess.com** with **Bambin
 - 📺 **Watch TV Streams**: [http://localhost:3000/watch](http://localhost:3000/watch)
 - 👥 **Community & Clubs**: [http://localhost:3000/community](http://localhost:3000/community)
 - 📜 **Game History & Review**: [http://localhost:3000/history](http://localhost:3000/history)
-- 🔒 **Master Admin Portal**: [http://localhost:3000/admin-portal](http://localhost:3000/admin-portal) *(Passcode: `admin123`)*
+- 🔒 **Master Admin Portal**: [http://localhost:3000/admin-portal](http://localhost:3000/admin-portal) *(server-protected; configure `ADMIN_ACCESS_CODE`)*

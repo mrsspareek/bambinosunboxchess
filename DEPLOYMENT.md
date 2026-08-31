@@ -2,7 +2,7 @@
 
 ## Supported deployment shape
 
-The application builds as a Next.js 14 Node.js service. The current durable-data adapter supports one application instance with one persistent encrypted volume. Use Node.js 20 LTS.
+The application builds as a Next.js 14 Node.js service. The current durable-data adapter supports one application instance with one persistent encrypted volume. Use Node.js 22 LTS (required by the maintained Capacitor toolchain).
 
 For a pilot deployment:
 
@@ -13,7 +13,7 @@ For a pilot deployment:
 5. Run `npm run build`.
 6. Start with `npm run start` behind the provider’s TLS proxy.
 7. Configure the health check as `GET /api/health`.
-8. Confirm admin routes redirect to `/admin-login` when no valid HTTP-only session exists.
+8. Confirm the proxy and server route gates redirect to `/admin-login` when no valid HTTP-only session exists.
 
 For multi-instance or commercial scale, replace JSON repositories and all browser-local content stores with a managed transactional database and object storage before adding replicas.
 
@@ -57,7 +57,7 @@ npm run start
 
 ## Security baseline
 
-- Admin routes are protected by middleware and a signed, HTTP-only, `SameSite=Lax`, secure production cookie.
+- Admin routes are protected by the Next.js proxy plus server route gates and a signed, HTTP-only, `SameSite=Lax`, secure production cookie.
 - Security headers include MIME sniffing protection, restrictive browser permissions, HSTS in production, and a frame-ancestor policy limited to self and Zing.
 - Zing return URLs are HTTPS and origin allow-listed.
 - Launch tokens are HMAC-signed, short-lived, and contain only opaque launch IDs.

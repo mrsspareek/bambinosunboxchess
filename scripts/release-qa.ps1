@@ -20,7 +20,7 @@ $required = @(
   'DEPLOYMENT.md',
   '.env.example',
   'src\app\api\health\route.ts',
-  'src\middleware.ts',
+  'src\proxy.ts',
   'src\lib\fullCurriculumData.ts'
 )
 foreach ($path in $required) {
