@@ -24,6 +24,23 @@ export function createAdminSession(): string {
   return `${encoded}.${signature(encoded)}`;
 }
 
+export function validAdminSession(token: string | undefined): boolean {
+  if (!token) return false;
+  const [encoded, suppliedSignature, extra] = token.split('.');
+  if (!encoded || !suppliedSignature || extra) return false;
+
+  try {
+    const expectedSignature = signature(encoded);
+    const supplied = Buffer.from(suppliedSignature);
+    const expected = Buffer.from(expectedSignature);
+    if (supplied.length !== expected.length || !timingSafeEqual(supplied, expected)) return false;
+    const payload = JSON.parse(Buffer.from(encoded, 'base64url').toString('utf8')) as { role?: string; exp?: number };
+    return payload.role === 'admin' && typeof payload.exp === 'number' && payload.exp > Math.floor(Date.now() / 1000);
+  } catch {
+    return false;
+  }
+}
+
 export function configuredAdminAccessCode(): string {
   if (process.env.ADMIN_ACCESS_CODE) return process.env.ADMIN_ACCESS_CODE;
   return 'admin123';
