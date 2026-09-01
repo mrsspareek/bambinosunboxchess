@@ -22,11 +22,6 @@
       width: 96px;
       height: 96px;
       margin-bottom: 24px;
-      animation: pulse 2s infinite ease-in-out;
-    }
-    @keyframes pulse {
-      0%, 100% { transform: scale(1); }
-      50% { transform: scale(1.08); }
     }
     .spinner {
       width: 32px;
@@ -49,9 +44,10 @@
   <div class="spinner"></div>
 
   <script>
+    const targetUrl = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1' ? 'http://10.0.2.2:3000' : window.location.origin;
     setTimeout(() => {
-      window.location.href = "http://localhost:3000";
-    }, 500);
+      window.location.href = targetUrl;
+    }, 300);
   </script>
 </body>
 </html>

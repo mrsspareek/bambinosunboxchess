@@ -4,15 +4,15 @@
   "webDir": "public",
   "bundledWebRuntime": false,
   "server": {
-    "androidScheme": "https",
-    "iosScheme": "https",
-    "cleartext": true
+    "url": "http://10.0.2.2:3000",
+    "cleartext": true,
+    "androidScheme": "http"
   },
   "plugins": {
     "SplashScreen": {
-      "launchShowDuration": 2000,
+      "launchShowDuration": 1500,
       "launchAutoHide": true,
-      "backgroundColor": "#2563EB",
+      "backgroundColor": "#020617",
       "androidSplashResourceName": "splash",
       "androidScaleType": "CENTER_CROP",
       "showSpinner": false
