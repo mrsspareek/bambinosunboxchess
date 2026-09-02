@@ -12,8 +12,10 @@ export default function CommunityPage() {
           <Users className="w-9 h-9" />
         </div>
         <div>
-          <h1 className="text-2xl md:text-3xl font-black text-slate-900">Bambinos Chess Community</h1>
-          <p className="text-slate-500 font-medium text-sm">Clubs, student forums, tournaments, and friend leaderboards</p>
+          <h1 className="text-2xl md:text-3xl font-black text-slate-900">Unbox Chess Community</h1>
+          <p className="text-sm font-medium text-slate-500 max-w-lg">
+            Connect with fellow chess enthusiasts, join club tournaments, and participate in community leaderboards.
+          </p>
         </div>
       </div>
 
@@ -26,7 +28,7 @@ export default function CommunityPage() {
           <div className="space-y-3">
             {[
               { name: 'Unbox Chess Champions Club', members: '1,240 Members', status: 'Official' },
-              { name: 'Bambinos Tactics Masters', members: '820 Members', status: 'Active' },
+              { name: 'Unbox Chess Tactics Masters', members: '820 Members', status: 'Active' },
               { name: 'Junior Grandmaster League', members: '450 Members', status: 'Tournament' }
             ].map((club, i) => (
               <div key={i} className="p-4 rounded-2xl bg-slate-50 border border-slate-200 flex items-center justify-between">

@@ -4,18 +4,22 @@ import React from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useAuth } from '../context/AuthContext';
-import { Home, Puzzle, GraduationCap, BookOpen, Menu, Lock, Tv } from 'lucide-react';
+import { Home, Gamepad2, Puzzle, Trophy, Lock } from 'lucide-react';
 
 export const MobileBottomNav: React.FC = () => {
   const pathname = usePathname();
   const { userTier, triggerPaywall } = useAuth();
 
+  // Hide on Admin routes
+  if (pathname?.startsWith('/admin') || pathname?.startsWith('/admin-portal') || pathname?.startsWith('/admin-login')) {
+    return null;
+  }
+
   const tabs = [
     { label: 'Home', icon: Home, href: '/', isPremium: false },
-    { label: 'Puzzles', icon: Puzzle, href: '/puzzles', isPremium: true },
-    { label: 'Learn', icon: GraduationCap, href: '/learn', isPremium: true },
-    { label: 'Watch', icon: Tv, href: '/watch', isPremium: false },
-    { label: 'More', icon: Menu, href: '/history', badge: 3, isPremium: false }
+    { label: 'Play', icon: Gamepad2, href: '/play', isPremium: false },
+    { label: 'Puzzles', icon: Puzzle, href: '/puzzles', isPremium: false },
+    { label: 'Ranks', icon: Trophy, href: '/leaderboard', isPremium: false }
   ];
 
   const handleTabClick = (e: React.MouseEvent, href: string, label: string, isPremium: boolean) => {

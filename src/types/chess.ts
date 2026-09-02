@@ -47,6 +47,7 @@ export interface Puzzle {
   characterPrompt?: string;
   turn: 'w' | 'b';
   difficulty: 'Easy' | 'Medium' | 'Hard';
+  level?: 1 | 2 | 3;
   sessionNumber?: number;
   category?: 'beginner' | 'advanced'; // Beginner vs Advanced category
   puzzleType?: 'standard' | 'guided_activity';

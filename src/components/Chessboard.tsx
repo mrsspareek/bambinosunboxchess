@@ -14,12 +14,8 @@ interface ChessboardProps {
   showEvalBar?: boolean;
   evaluation?: number;
   lastMove?: { from: string; to: string } | null;
+  size?: 'sm' | 'md' | 'lg' | 'xl' | 'full';
 }
-
-const PIECE_UNICODE: Record<string, string> = {
-  'w-p': '♙', 'w-r': '♖', 'w-n': '♘', 'w-b': '♗', 'w-q': '♕', 'w-k': '♔',
-  'b-p': '♟', 'b-r': '♜', 'b-n': '♞', 'b-b': '♝', 'b-q': '♛', 'b-k': '♚'
-};
 
 export const Chessboard: React.FC<ChessboardProps> = ({
   fen = 'rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1',
@@ -29,7 +25,8 @@ export const Chessboard: React.FC<ChessboardProps> = ({
   interactive = true,
   showEvalBar = true,
   evaluation = 0.2,
-  lastMove = null
+  lastMove = null,
+  size = 'xl'
 }) => {
   const [game, setGame] = useState<Chess>(new Chess(fen));
   const [selectedSquare, setSelectedSquare] = useState<Square | null>(null);
@@ -92,13 +89,29 @@ export const Chessboard: React.FC<ChessboardProps> = ({
 
   const evalPercent = Math.min(95, Math.max(5, 50 + evaluation * 8));
 
+  const sizeClasses = {
+    sm: 'w-full max-w-[280px] sm:max-w-[340px]',
+    md: 'w-full max-w-[340px] sm:max-w-[420px]',
+    lg: 'w-full max-w-[380px] sm:max-w-[460px]',
+    xl: 'w-full max-w-[92vw] sm:max-w-[480px] md:max-w-[520px]',
+    full: 'w-full max-w-[56vh] sm:max-w-[58vh] md:max-w-[60vh] lg:max-w-[62vh]'
+  }[size || 'full'];
+
+  const evalBarHeight = {
+    sm: 'h-[280px] sm:h-[340px]',
+    md: 'h-[340px] sm:h-[420px]',
+    lg: 'h-[380px] sm:h-[460px]',
+    xl: 'h-[92vw] sm:h-[480px] md:h-[520px]',
+    full: 'h-[56vh] sm:h-[58vh] md:h-[60vh] lg:h-[62vh]'
+  }[size || 'full'];
+
   return (
-    <div className="flex items-center gap-2 sm:gap-3 w-full justify-center">
+    <div className="flex items-center gap-2 sm:gap-4 w-full justify-center">
       {/* Engine Evaluation Bar */}
       {showEvalBar && (
-        <div className="hidden sm:flex relative w-3.5 sm:w-4 h-[320px] sm:h-[420px] md:h-[480px] bg-slate-950 rounded-full overflow-hidden border border-slate-700 shadow-xl flex-col justify-end shrink-0">
+        <div className={`hidden sm:flex relative w-3.5 sm:w-4 ${evalBarHeight} bg-slate-900 rounded-full overflow-hidden border border-slate-300 shadow-md flex-col justify-end shrink-0`}>
           <div 
-            className="w-full bg-slate-100 transition-all duration-300 shadow-inner" 
+            className="w-full bg-emerald-500 transition-all duration-300 shadow-inner" 
             style={{ height: `${evalPercent}%` }}
           />
           <div className="absolute top-1 left-0.5 right-0.5 text-[8px] font-black text-center text-white drop-shadow">
@@ -107,8 +120,8 @@ export const Chessboard: React.FC<ChessboardProps> = ({
         </div>
       )}
 
-      {/* 8x8 Board Container - Matching iOS Video Aspect Ratio & Visual Tokens */}
-      <div className="relative select-none w-full max-w-[340px] sm:max-w-[420px] md:max-w-[480px] aspect-square rounded-2xl overflow-hidden shadow-2xl border-2 sm:border-4 border-bambinos-600 bg-slate-900">
+      {/* 8x8 Board Container (Rich Blue #2b70d3 & Solid White #FFFFFF Theme) */}
+      <div className={`relative select-none w-full ${sizeClasses} aspect-square rounded-xl sm:rounded-2xl overflow-hidden shadow-2xl border-4 sm:border-[6px] border-[#1e293b] bg-[#1e293b] touch-manipulation`}>
         <div className="grid grid-cols-8 grid-rows-8 w-full h-full">
           {displayRanks.map((rank, rIdx) =>
             displayFiles.map((file, fIdx) => {
@@ -120,34 +133,38 @@ export const Chessboard: React.FC<ChessboardProps> = ({
               const isAnnotated = annotation?.square === square;
               const isLastMoveSquare = lastMove && (lastMove.from === square || lastMove.to === square);
 
+              const pieceCode = piece ? `${piece.color}${piece.type.toUpperCase()}` : null;
+
               return (
                 <div
                   key={square}
                   onClick={() => handleSquareClick(square)}
-                  className={`relative flex items-center justify-center cursor-pointer transition-all duration-150 ${
-                    isDark ? 'bg-bambinos-600 text-white' : 'bg-slate-100 text-bambinos-900'
-                  } ${isSelected ? '!bg-amber-300/90' : ''} ${isLastMoveSquare ? '!bg-cyan-400/40' : ''}`}
+                  className={`relative flex items-center justify-center cursor-pointer transition-all duration-150 touch-manipulation ${
+                    isDark ? 'bg-[#2b70d3]' : 'bg-[#ffffff]'
+                  } ${isSelected ? '!bg-[#f59e0b]' : ''} ${isLastMoveSquare ? '!bg-[#60a5fa]/70' : ''}`}
                 >
-                  {/* Rank & File Labels */}
+                  {/* Rank Labels (Column 0) */}
                   {fIdx === 0 && (
-                    <span className={`absolute top-0.5 left-1 text-[8px] sm:text-[10px] font-extrabold opacity-75 ${isDark ? 'text-white' : 'text-bambinos-700'}`}>
+                    <span className={`absolute top-1 left-1.5 text-[11px] sm:text-sm font-bold select-none pointer-events-none z-10 ${isDark ? 'text-[#ffffff]' : 'text-[#2b70d3]'}`}>
                       {rank}
                     </span>
                   )}
+
+                  {/* File Labels (Row 7) */}
                   {rIdx === 7 && (
-                    <span className={`absolute bottom-0.5 right-1 text-[8px] sm:text-[10px] font-extrabold opacity-75 ${isDark ? 'text-white' : 'text-bambinos-700'}`}>
+                    <span className={`absolute bottom-1 right-1.5 text-[11px] sm:text-sm font-bold select-none pointer-events-none z-10 ${isDark ? 'text-[#ffffff]' : 'text-[#2b70d3]'}`}>
                       {file}
                     </span>
                   )}
 
                   {/* Possible Move Indicator Dot / Ring */}
                   {isPossible && (
-                    <div className={`absolute rounded-full z-10 ${piece ? 'w-full h-full border-2 sm:border-4 border-rose-500/80 bg-rose-500/20' : 'w-3 h-3 sm:w-4 sm:h-4 bg-rose-500/90 shadow-lg animate-pulse'}`} />
+                    <div className={`absolute rounded-full z-10 pointer-events-none ${piece ? 'w-full h-full border-4 border-[#1e293b]/40 bg-[#1e293b]/15' : 'w-4 h-4 sm:w-5 sm:h-5 bg-[#1e293b]/30'}`} />
                   )}
 
                   {/* Move Evaluation Badge Overlay */}
                   {isAnnotated && annotation && (
-                    <div className="absolute -top-1.5 -right-1.5 z-20 flex items-center gap-0.5 px-1.5 py-0.5 rounded-full text-[10px] sm:text-xs font-black text-white shadow-lg animate-bounce"
+                    <div className="absolute -top-1.5 -right-1.5 z-20 flex items-center gap-0.5 px-2 py-0.5 rounded-full text-xs font-black text-white shadow-lg animate-bounce"
                       style={{
                         backgroundColor:
                           annotation.type === 'brilliant' ? '#06b6d4' :
@@ -159,15 +176,14 @@ export const Chessboard: React.FC<ChessboardProps> = ({
                     </div>
                   )}
 
-                  {/* Piece Representation */}
-                  {piece && (
-                    <span className={`text-3xl sm:text-4xl md:text-5xl font-serif transform hover:scale-110 transition-transform ${
-                      piece.color === 'w' 
-                        ? 'text-white drop-shadow-[0_2px_4px_rgba(0,0,0,0.9)] [text-shadow:_0_1px_2px_rgba(0,0,0,0.8)]' 
-                        : 'text-slate-900 drop-shadow-[0_1px_2px_rgba(255,255,255,0.8)]'
-                    }`}>
-                      {PIECE_UNICODE[`${piece.color}-${piece.type}`]}
-                    </span>
+                  {/* Authentic Cburnett SVG Piece Image */}
+                  {pieceCode && (
+                    <img
+                      src={`/pieces/cburnett/${pieceCode}.svg`}
+                      alt={pieceCode}
+                      draggable={false}
+                      className="piece w-[88%] h-[88%] object-contain select-none pointer-events-none drop-shadow-sm transition-transform duration-100 active:scale-105"
+                    />
                   )}
                 </div>
               );

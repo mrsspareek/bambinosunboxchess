@@ -16,39 +16,36 @@ interface AuthContextType {
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
 export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
-  const [userTier, setUserTierState] = useState<UserTier>('subscribed'); // Default subscribed for full demo, toggleable to free
+  const [userTier, setUserTierState] = useState<UserTier>('subscribed');
   const [showPaywallModal, setShowPaywallModal] = useState(false);
   const [paywallFeatureName, setPaywallFeatureName] = useState('');
 
   useEffect(() => {
     if (typeof window !== 'undefined') {
-      const stored = localStorage.getItem('unbox_user_tier') as UserTier;
-      if (stored) {
-        setUserTierState(stored);
-      }
+      setUserTierState('subscribed');
+      localStorage.setItem('unbox_user_tier', 'subscribed');
     }
   }, []);
 
   const setUserTier = (tier: UserTier) => {
-    setUserTierState(tier);
+    setUserTierState('subscribed');
     if (typeof window !== 'undefined') {
-      localStorage.setItem('unbox_user_tier', tier);
+      localStorage.setItem('unbox_user_tier', 'subscribed');
     }
   };
 
-  const triggerPaywall = (featureName: string) => {
-    setPaywallFeatureName(featureName);
-    setShowPaywallModal(true);
+  const triggerPaywall = (_featureName: string) => {
+    // Paid feature disabled; all features are 100% unlocked for all users.
   };
 
   return (
     <AuthContext.Provider
       value={{
-        userTier,
+        userTier: 'subscribed',
         setUserTier,
-        showPaywallModal,
+        showPaywallModal: false,
         setShowPaywallModal,
-        paywallFeatureName,
+        paywallFeatureName: '',
         triggerPaywall
       }}
     >

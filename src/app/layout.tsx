@@ -1,13 +1,13 @@
 import './globals.css';
 import type { Metadata, Viewport } from 'next';
 import { AuthProvider } from '../context/AuthContext';
-import { Sidebar } from '../components/Sidebar';
-import { MobileBottomNav } from '../components/MobileBottomNav';
 import { SubscriptionPaywallModal } from '../components/SubscriptionPaywallModal';
+import { BookDemoBanner } from '../components/BookDemoBanner';
+import { MobileBottomNav } from '../components/MobileBottomNav';
 
 export const metadata: Metadata = {
-  title: 'Bambinos - Unbox Chess iOS & Web',
-  description: 'The complete chess learning and online gaming platform by Bambinos',
+  title: 'Unbox Chess',
+  description: 'Daily Chess Puzzles, 3-Level Studio, and Online Game Arena',
   manifest: '/manifest.json',
   appleWebApp: {
     capable: true,
@@ -30,20 +30,20 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en">
+    <html lang="en" className="scroll-smooth overflow-x-hidden">
       <head>
         <link rel="apple-touch-icon" href="/logo.png" />
         <meta name="apple-mobile-web-app-capable" content="yes" />
         <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
       </head>
-      <body className="bg-slate-50 text-slate-900 min-h-screen flex antialiased select-none">
+      <body className="bg-slate-50 text-slate-900 min-h-screen flex flex-col antialiased overflow-x-hidden">
         <AuthProvider>
-          <Sidebar />
-          <main className="flex-1 pb-20 md:pb-8 overflow-y-auto">
+          <BookDemoBanner />
+          <main className="flex-1 w-full max-w-full overflow-y-auto overflow-x-hidden pb-16 md:pb-0">
             {children}
           </main>
-          <MobileBottomNav />
           <SubscriptionPaywallModal />
+          <MobileBottomNav />
         </AuthProvider>
       </body>
     </html>
