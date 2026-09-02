@@ -6,15 +6,9 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint",
-    "ios:sync": "npx cap sync ios",
-    "ios:open": "npx cap open ios",
-    "android:sync": "npx cap sync android",
-    "android:open": "npx cap open android"
+    "lint": "next lint"
   },
   "dependencies": {
-    "@capacitor/core": "^6.2.0",
-    "@capacitor/ios": "^6.2.0",
     "chess.js": "^1.0.0-beta.8",
     "clsx": "^2.1.1",
     "framer-motion": "^11.11.17",
@@ -25,8 +19,6 @@
     "tailwind-merge": "^2.5.4"
   },
   "devDependencies": {
-    "@capacitor/android": "^6.2.0",
-    "@capacitor/cli": "^6.2.0",
     "@types/node": "^20.17.6",
     "@types/react": "^18.3.12",
     "@types/react-dom": "^18.3.1",

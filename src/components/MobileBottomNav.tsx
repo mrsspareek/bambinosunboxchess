@@ -15,7 +15,15 @@ export const MobileBottomNav: React.FC = () => {
     return null;
   }
 
-  const tabs = [
+  interface NavTab {
+    label: string;
+    icon: any;
+    href: string;
+    isPremium: boolean;
+    badge?: string;
+  }
+
+  const tabs: NavTab[] = [
     { label: 'Home', icon: Home, href: '/', isPremium: false },
     { label: 'Play', icon: Gamepad2, href: '/play', isPremium: false },
     { label: 'Puzzles', icon: Puzzle, href: '/puzzles', isPremium: false },
