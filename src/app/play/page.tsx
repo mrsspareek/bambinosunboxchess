@@ -59,6 +59,7 @@ import {
   getUserPointsState,
   UserPointsState,
   addMatchPoints,
+  spendMatchPoints,
   getRandomMagnusHint,
   MagnusHint
 } from '../../lib/leaderboardStore';
