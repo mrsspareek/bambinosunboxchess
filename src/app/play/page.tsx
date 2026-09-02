@@ -224,6 +224,8 @@ function PlayArenaContent() {
   const [userPoints, setUserPoints] = useState({ matchPoints: 450, puzzlePoints: 320, totalPoints: 770, streak: 5 });
   const [showLeaderboardModal, setShowLeaderboardModal] = useState(false);
   const [activeMagnusHint, setActiveMagnusHint] = useState<MagnusHint | null>(null);
+  const [copiedLink, setCopiedLink] = useState(false);
+  const [challengeUrl, setChallengeUrl] = useState('https://unboxchess.com/play?room=live_7728');
 
   // Interactive Game Review Mode States
   const [reviewMode, setReviewMode] = useState<'summary' | 'interactive'>('summary');
