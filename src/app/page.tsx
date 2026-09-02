@@ -461,6 +461,17 @@ export default function SinglePageStudentPortal() {
         {/* 1. PLAY ARENA (PLACED AT THE TOP - SMALL ANIMATED CHESSBOARD) */}
         {/* ========================================================================= */}
         <section id="play-arena" className="space-y-6 pt-2">
+          {/* Mobile-Only Heading (Placed directly under Header on Mobile View) */}
+          <div className="block md:hidden text-center space-y-1 pb-1">
+            <div className="inline-flex items-center gap-1.5 px-3 py-0.5 rounded-full bg-bambinos-50 border border-bambinos-200 text-bambinos-700 font-extrabold text-[11px]">
+              <span className="w-2 h-2 rounded-full bg-emerald-500 animate-ping" />
+              {onlineCount.toLocaleString()} Players Online Now
+            </div>
+            <h2 className="text-xl font-black text-slate-900 tracking-tight leading-snug">
+              Welcome to Unbox Chess, <span className="text-amber-500">{currentUser ? currentUser.name.split(' ')[0] : 'Zaid'}</span>
+            </h2>
+          </div>
+
           {/* Top Left Stats & History Header Bar (Vibrant & Colorful Theme) */}
           <div className="bg-gradient-to-r from-amber-500/10 via-orange-50/50 to-indigo-50/50 p-4 sm:p-5 rounded-3xl border-2 border-amber-300/80 shadow-lg shadow-amber-500/10 flex flex-col sm:flex-row items-center justify-between gap-4 relative overflow-hidden">
             {/* Ambient Background Radial Glow */}
@@ -540,8 +551,8 @@ export default function SinglePageStudentPortal() {
 
             {/* Right Column: Divided into 2 Distinct Parts (lg:col-span-5 matching lower section) */}
             <div className="lg:col-span-5 space-y-4 text-left">
-              {/* Main Headline */}
-              <div className="space-y-1">
+              {/* Main Headline (Desktop Only - Mobile shown at top) */}
+              <div className="hidden md:block space-y-1">
                 <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-bambinos-50 border border-bambinos-200 text-bambinos-700 font-extrabold text-xs">
                   <span className="w-2 h-2 rounded-full bg-emerald-500 animate-ping" />
                   {onlineCount.toLocaleString()} Players Online Now
