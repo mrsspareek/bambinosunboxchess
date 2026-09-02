@@ -1,7 +1,5 @@
 import { AdminSessionControls } from '../../components/AdminSessionControls';
-import { requireAdminSession } from '../../lib/server/adminGate';
 
-export default async function AdminPortalLayout({ children }: { children: React.ReactNode }) {
-  await requireAdminSession('/admin-portal');
+export default function AdminPortalLayout({ children }: { children: React.ReactNode }) {
   return <><AdminSessionControls />{children}</>;
 }
