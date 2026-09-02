@@ -5,7 +5,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { usePathname, useRouter } from 'next/navigation';
 import { useAuth } from '../context/AuthContext';
-import { Gamepad2, Puzzle, Trophy, Sparkles, ArrowRight } from 'lucide-react';
+import { Gamepad2, Puzzle, Trophy, Sparkles, ArrowRight, Lock } from 'lucide-react';
 import { BookDemoModal } from './BookDemoModal';
 
 export const Sidebar: React.FC = () => {
