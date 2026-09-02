@@ -179,7 +179,14 @@ export const Chessboard: React.FC<ChessboardProps> = ({
                   {/* Authentic Cburnett SVG Piece Image */}
                   {pieceCode && (
                     <img
-                      src={`/pieces/cburnett/${pieceCode}.svg`}
+                      src={`./pieces/cburnett/${pieceCode}.svg`}
+                      onError={(e) => {
+                        const target = e.currentTarget as HTMLImageElement;
+                        if (!target.dataset.tried) {
+                          target.dataset.tried = 'true';
+                          target.src = `pieces/${pieceCode}.svg`;
+                        }
+                      }}
                       alt={pieceCode}
                       draggable={false}
                       className="piece w-[88%] h-[88%] object-contain select-none pointer-events-none drop-shadow-sm transition-transform duration-100 active:scale-105"

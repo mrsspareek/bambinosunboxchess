@@ -39,7 +39,7 @@ export const Sidebar: React.FC = () => {
         <div className="p-5 flex items-center gap-3 border-b border-slate-100">
           <div className="relative w-11 h-11 flex items-center justify-center">
             <Image 
-              src="/logo2.png" 
+              src="./logo2.png" 
               alt="Bambinos Logo" 
               width={44} 
               height={44} 

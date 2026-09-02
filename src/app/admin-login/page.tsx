@@ -34,7 +34,7 @@ export default function AdminLoginPage() {
       <div className="w-full max-w-md rounded-3xl border border-slate-800 bg-white p-8 shadow-2xl">
         <div className="mb-7 text-center">
           <div className="mx-auto mb-4 flex h-16 w-16 items-center justify-center">
-            <Image src="/logo2.png" alt="Bambinos" width={64} height={64} className="object-contain" unoptimized priority />
+            <Image src="./logo2.png" alt="Bambinos" width={64} height={64} className="object-contain" unoptimized priority />
           </div>
           <h1 className="text-2xl font-black text-slate-900">Admin secure sign-in</h1>
           <p className="mt-2 text-sm font-medium text-slate-500">Protected server-side with an encrypted, HTTP-only session cookie.</p>

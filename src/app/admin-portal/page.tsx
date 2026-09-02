@@ -227,7 +227,7 @@ export default function AdminPortalPage() {
         <div className="flex items-center gap-4">
           <div className="relative w-12 h-12 flex items-center justify-center">
             <Image 
-              src="/logo2.png" 
+              src="./logo2.png" 
               alt="Bambinos Logo" 
               width={48} 
               height={48} 

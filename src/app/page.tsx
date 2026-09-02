@@ -368,7 +368,7 @@ export default function SinglePageStudentPortal() {
           <div className="flex items-center gap-3">
             <div className="relative w-10 h-10 flex items-center justify-center">
               <Image 
-                src="/logo2.png" 
+                src="./logo2.png" 
                 alt="Bambinos Logo" 
                 width={40} 
                 height={40} 

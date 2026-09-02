@@ -200,7 +200,7 @@ export const FreeSignUpModal: React.FC<FreeSignUpModalProps> = ({ isOpen, onSucc
         <div className="text-center space-y-2">
           <div className="relative w-14 h-14 mx-auto flex items-center justify-center bg-slate-50 rounded-2xl border border-slate-200 p-2 shadow-sm">
             <Image
-              src="/logo2.png"
+              src="./logo2.png"
               alt="Unbox Chess Logo"
               width={52}
               height={52}
