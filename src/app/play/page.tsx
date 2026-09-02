@@ -57,6 +57,7 @@ import {
 import { LeaderboardModal } from '../../components/LeaderboardModal';
 import {
   getUserPointsState,
+  UserPointsState,
   addMatchPoints,
   getRandomMagnusHint,
   MagnusHint

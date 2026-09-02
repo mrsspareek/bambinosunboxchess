@@ -21,7 +21,7 @@ import { sound } from '../lib/sound';
 import { FreeSignUpModal, StudentUserData } from '../components/FreeSignUpModal';
 import { BookDemoModal } from '../components/BookDemoModal';
 import { LeaderboardModal } from '../components/LeaderboardModal';
-import { getUserPointsState } from '../lib/leaderboardStore';
+import { getUserPointsState, UserPointsState } from '../lib/leaderboardStore';
 import { MidnightCountdown } from '../components/MidnightCountdown';
 import {
   Sparkles,
