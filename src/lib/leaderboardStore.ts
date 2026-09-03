@@ -111,7 +111,7 @@ const INITIAL_MOCK_LEADERBOARD: Omit<LeaderboardEntry, 'rank'>[] = [
   },
   {
     id: 'usr-4',
-    name: 'Zaid Iqbal',
+    name: 'Shyam Pareek',   // 👈 Put your name here
     avatar: '/pieces/cburnett/wK.svg',
     matchPoints: 450,
     puzzlePoints: 320,
