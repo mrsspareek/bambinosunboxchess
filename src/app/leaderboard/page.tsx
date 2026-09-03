@@ -171,14 +171,9 @@ export default function LeaderboardPage() {
                 </div>
 
                 <div>
-                  <div className="text-base font-black text-white flex items-center gap-2">
-                    <span>{displayName}</span>
-                    {player.isCurrentUser && (
-                      <span className="bg-amber-500 text-slate-950 text-xs font-black px-2 py-0.5 rounded-full">
-                        You
-                      </span>
-                    )}
-                  </div>
+                 <div className="text-base font-black text-white flex items-center gap-2">
+  <span>{displayName}</span>
+</div>
                   <div className="text-xs text-slate-400 font-medium flex items-center gap-2 mt-0.5">
                     <span>{player.city}</span>
                     <span>•</span>
