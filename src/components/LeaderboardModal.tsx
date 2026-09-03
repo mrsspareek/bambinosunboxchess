@@ -178,14 +178,9 @@ export const LeaderboardModal: React.FC<LeaderboardModalProps> = ({
                   </div>
 
                   <div>
-                    <div className="text-sm font-black text-slate-900 flex items-center gap-1.5">
-                      <span>{displayName}</span>
-                      {player.isCurrentUser && (
-                        <span className="bg-amber-500 text-slate-950 text-[10px] font-black px-2 py-0.2 rounded-full">
-                          You
-                        </span>
-                      )}
-                    </div>
+                   <div className="text-sm font-black text-slate-900 flex items-center gap-1.5">
+  <span>{displayName}</span>
+</div>
                     <div className="text-xs text-slate-500 font-medium flex items-center gap-2">
                       <span>{player.city}</span>
                       <span>|</span>
