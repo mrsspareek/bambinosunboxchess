@@ -119,10 +119,10 @@ export const Sidebar: React.FC = () => {
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-2">
               <div className="w-8 h-8 rounded-full bg-bambinos-600 text-white font-black flex items-center justify-center text-xs shadow-md">
-                ZI
+                SP
               </div>
               <div>
-                <p className="text-xs font-extrabold text-slate-900 leading-none">Zaid Iqbal</p>
+                <p className="text-xs font-extrabold text-slate-900 leading-none">Shyam Pareek</p>
                 <span className="text-[10px] font-extrabold text-emerald-600">✓ Full Access Student</span>
               </div>
             </div>
