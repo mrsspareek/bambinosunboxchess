@@ -602,7 +602,7 @@ function PlayArenaContent() {
 
               <div>
                 <div className="flex items-center gap-2">
-                  <span className="text-sm font-black text-slate-900">Zaid Iqbal</span>
+                  <span className="text-sm font-black text-slate-900">Shyam Pareek</span>
                   <span className="text-xs text-slate-500 font-bold">(940)</span>
                 </div>
                 <div className="flex items-center gap-2 text-xs font-extrabold text-slate-500">
@@ -774,7 +774,7 @@ function PlayArenaContent() {
               {/* Match Stakes Banner */}
               <div className="bg-slate-100 p-3 rounded-xl border border-slate-200 text-center text-xs space-y-1">
                 <div className="font-black text-slate-900">
-                  Zaid Iqbal (940) vs. {opponent ? opponent.name : 'Opponent'} ({opponent ? opponent.rating : 889})
+                  Shyam Pareek (940) vs. {opponent ? opponent.name : 'Opponent'} ({opponent ? opponent.rating : 889})
                 </div>
                 <div className="text-[11px] font-bold text-slate-600">
                   10 min • Rated • <span className="text-emerald-700 font-black">Win +16</span> / <span className="text-amber-700 font-black">Draw +2</span> / <span className="text-rose-700 font-black">Loss -12</span>
@@ -853,7 +853,7 @@ function PlayArenaContent() {
                     {/* Move Quality Classification Comparison Table */}
                     <div className="bg-white rounded-2xl border border-slate-200 p-2.5 space-y-1.5 text-xs font-mono shadow-sm">
                       <div className="grid grid-cols-12 gap-1 text-[11px] font-black text-slate-500 border-b border-slate-200 pb-1.5 px-2 text-center">
-                      <span className="col-span-3 text-left">{userName || 'Player'} (White)</span>
+                      <span className="col-span-3 text-left">{Shyam Pareek || 'Player'} (White)</span>
                         <span className="col-span-6">Category</span>
                         <span className="col-span-3 text-right">Opponent</span>
                       </div>
