@@ -853,7 +853,7 @@ function PlayArenaContent() {
                     {/* Move Quality Classification Comparison Table */}
                     <div className="bg-white rounded-2xl border border-slate-200 p-2.5 space-y-1.5 text-xs font-mono shadow-sm">
                       <div className="grid grid-cols-12 gap-1 text-[11px] font-black text-slate-500 border-b border-slate-200 pb-1.5 px-2 text-center">
-                        <span className="col-span-3 text-left">You (White)</span>
+                      <span className="col-span-3 text-left">{userName || 'Player'} (White)</span>
                         <span className="col-span-6">Category</span>
                         <span className="col-span-3 text-right">Opponent</span>
                       </div>
